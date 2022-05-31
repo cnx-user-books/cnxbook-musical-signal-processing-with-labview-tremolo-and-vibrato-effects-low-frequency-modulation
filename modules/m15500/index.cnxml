@@ -1,0 +1,237 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>[ mini-project ] "The Whistler" virtual musical instrument (VMI) in LabVIEW</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>813cdc68-31fb-4986-b616-7946c62e0e6b</md:uuid>
+</metadata>
+
+<content>
+
+<table frame="none" id="labview_banner" summary=""><tgroup cols="2">
+<colspec rowsep="0" colsep="0"/> <colspec colwidth="6in" rowsep="0" colsep="0"/>
+<tbody>
+  <row>
+    <entry morerows="3"><media id="idp4491936" alt=""><image src="../../media/LabVIEWq.png" mime-type="image/png"/></media></entry>
+    <entry> This module refers to LabVIEW, a software development environment that features a graphical programming language.
+       Please see the <link document="m15428">LabVIEW QuickStart Guide</link> module for tutorials and documentation that will help you:</entry>
+  </row>
+  <row> <entry>• Apply LabVIEW to Audio Signal Processing </entry> </row>
+  <row> <entry>• Get started with LabVIEW</entry> </row>
+  <row> <entry>• Obtain a fully-functional evaluation edition of LabVIEW</entry> </row>
+</tbody>
+</tgroup>
+</table>
+
+
+<section id="sec1">
+<title>Objective</title>
+
+<para id="par2">An individual who can whistle with vibrato can be well-modeled by a sinusoidal oscillator, an attack-sustain-release envelope with a moderate attack and release time, and a low-frequency sinusoidal frequency modulation. In this mini-project you will develop code to model the whistler as a LabVIEW <term>virtual musical instrument</term> (<term>VMI</term>) to be "played" by a MIDI file.</para>
+
+</section>
+
+<section id="sec3">
+<title>Prerequisite Modules</title>
+
+<para id="par4">If you have not done so already, please study the pre-requisite module <link document="m15496">Vibrato Effect</link>. 
+If you are relatively new to LabVIEW, consider taking the course <link document="col10440">LabVIEW Techniques for Audio Signal Processing</link> 
+which provides the foundation you need to complete this mini-project activity, including working with arrays, creating subVIs, 
+playing an array to the soundcard, and saving an array as a .wav sound file.</para>
+
+</section>
+
+<section id="sec5">
+<title>Deliverables</title>
+
+<list id="list6" list-type="bulleted">
+
+<item> All LabVIEW code that you develop (block diagrams and front panels) </item>
+<item> All generated sounds in .wav format  </item>
+<item> Any plots or diagrams requested </item>
+<item> Summary write-up of your results </item>
+
+</list>
+
+</section>
+
+<section id="sec7">
+<title>Part 1: Tone Generator with Vibrato</title>
+
+<para id="par8">In this part you will create a basic tone generator with vibrato. The tone generator will be a sinusoid of the form <m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mi>y</m:mi><m:mo stretchy="false">(</m:mo><m:mi>t</m:mi><m:mo stretchy="false">)</m:mo><m:mo>=</m:mo><m:mi>sin</m:mi><m:mo>⁡</m:mo><m:mo stretchy="false">(</m:mo><m:mi>ϕ</m:mi><m:mo stretchy="false">(</m:mo><m:mi>t</m:mi><m:mo stretchy="false">)</m:mo><m:mo stretchy="false">)</m:mo>
+  </m:mrow>
+ <m:annotation encoding="MathType-MTEF">
+ </m:annotation>
+ </m:semantics>
+</m:math>, where the phase function <m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mi>ϕ</m:mi><m:mo stretchy="false">(</m:mo><m:mi>t</m:mi><m:mo stretchy="false">)</m:mo>
+  </m:mrow>
+ <m:annotation encoding="MathType-MTEF">
+ </m:annotation>
+ </m:semantics>
+</m:math>  has the following form (<link target-id="eqn-phi-of-t"/>):</para>
+
+<equation id="eqn-phi-of-t">
+
+<m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mi>ϕ</m:mi><m:mo stretchy="false">(</m:mo><m:mi>t</m:mi><m:mo stretchy="false">)</m:mo><m:mo>=</m:mo><m:mn>2</m:mn><m:mi>π</m:mi><m:msub>
+    <m:mi>f</m:mi>
+    <m:mn>0</m:mn>
+   </m:msub>
+   <m:mi>t</m:mi><m:mo>+</m:mo><m:mi>Δ</m:mi><m:mi>f</m:mi><m:mi>sin</m:mi><m:mo>⁡</m:mo><m:mo stretchy="false">(</m:mo><m:mn>2</m:mn><m:mi>π</m:mi><m:msub>
+    <m:mi>f</m:mi>
+    <m:mi>R</m:mi>
+   </m:msub>
+   <m:mi>t</m:mi><m:mo stretchy="false">)</m:mo>
+  </m:mrow>
+ <m:annotation encoding="MathType-MTEF">
+ </m:annotation>
+ </m:semantics>
+</m:math>
+</equation>
+
+<para id="par10">where <m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>f</m:mi>
+    <m:mn>0</m:mn>
+   </m:msub>
+  </m:mrow>
+ <m:annotation encoding="MathType-MTEF">
+ </m:annotation>
+ </m:semantics>
+</m:math> is the tone frequency, <m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mi>Δ</m:mi><m:mi>f</m:mi>
+  </m:mrow>
+ <m:annotation encoding="MathType-MTEF">
+ </m:annotation>
+ </m:semantics>
+</m:math>  is the frequency deviation (vibrato depth), and <m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>f</m:mi>
+    <m:mi>R</m:mi>
+   </m:msub>
+    </m:mrow>
+ <m:annotation encoding="MathType-MTEF">
+ </m:annotation>
+ </m:semantics>
+</m:math> is the vibrato rate in Hz.
+
+Use the "Play Waveform" Express VI to listen to your end result <m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mi>y</m:mi><m:mo stretchy="false">(</m:mo><m:mi>t</m:mi><m:mo stretchy="false">)</m:mo>
+  </m:mrow>
+ <m:annotation encoding="MathType-MTEF">
+ </m:annotation>
+ </m:semantics>
+</m:math> , and experiment with the parameters to find suitable values for rate and depth to simulate the sound of a whistler.
+
+Refer to the screencast video in the module <link document="m15493">Frequency Modulation (FM) Techniques in LabVIEW</link> 
+for coding tips for this part.</para>
+
+</section>
+
+<section id="sec11">
+<title>Part 2: Attack-Sustain-Release Envelope Generator</title>
+
+<para id="par12">Create LabVIEW code to generate a time-varying intensity envelope for the overall attack, sustain, and decay of the note.
+Your code will require attack time and decay time (both in seconds), as well as the total number of required samples, and will produce an envelope composed of three straight-line segments as plotted in <link target-id="img-ASRenv"/>.</para>
+
+<figure id="img-ASRenv">
+<media id="idm1452112" alt=""><image src="../../media/lfmod_MP-sing-ASR.png" mime-type="image/png"/></media>
+<caption>
+   Attack-Sustain-Release envelope
+</caption>
+</figure>
+
+<para id="par14">The maximum intensity is fixed at 0 dB, and the minimum intensity is -40 dB. The attack and release times are fixed parameters that you adjust, and the sustain time is "stretchable" depending on the total number of required samples. If you have the inclination, make your envelope generator more robust so that it can handle the situation where the requested number of samples is less than the number of samples required for your attack and release intervals.</para>
+
+</section>
+
+<section id="sec15">
+<title>Part 3: Attenuator</title>
+
+<para id="par16">Create LabVIEW code that accepts an "amplitude" parameter in the range 0 to 1 and converts this parameter to attenuation in the range -40 dB to 0 dB. The amplitude parameter will ultimately be supplied by MIDI_JamSession and represents the MIDI "note-on" velocity. Your code will map linear velocity onto a logarithmic intensity.</para>
+
+</section>
+
+<section id="sec17">
+<title>Part 4: Overall Amplitude Envelope</title>
+
+<para id="par18">Combine the code fragments you developed in Parts 2 and 3 to create an overall intensity envelope. Remember that when you use  intensity values in decibels, you simply <emphasis>add</emphasis> them together. Next, "undo" the equation for decibels to convert the intensity envelope into an amplitude envelope (hint: you need a value of "20" someplace).
+
+Choose a representative set of parameter values and plot your overall intensity envelope and your overall amplitude envelope.
+</para>
+
+</section>
+
+<section id="sec19">
+<title>Part 5: Whistler VMI</title>
+
+<para id="par20">Design a <term>virtual musical instrument</term> (<term>VMI</term> for short) that sounds like someone whistling with vibrato. Your VMI will be played by "MIDI Jam Session." If necessary, visit <link document="m15053">MIDI Jam Session</link>, download the application VI .zip file, and view the screencast video in that module to learn more about the application and how to create an instrument subVI, or VMI. Your VMI will accept parameters that specify frequency, amplitude, and length of a single note, and will produce an array of audio samples corresponding to a single note.
+
+Use the tone generator you developed in Part 1, and apply the amplitude envelope you generated in Part 4. You may wish to keep all of your parameters as front-panel controls and add the "Play Waveform" Express VI to listen to your VMI during development. Adjust the parameters to obtain pleasing and realistic settings, then convert the front-panel controls to constants and remove "Play Waveform." Your finished VMI must not contain any front panel controls or indicators beyond those provided in the prototype instrument.
+
+Choose a suitable MIDI file and use MIDI_JamSession to play your whistler VMI. MIDI files that contain a solo instrument, slow tempo, and long sustained notes  likely produce better results, for example, Johann Pachelbel's "Canon in D." Try
+<link url="http://www.classicalguitarmidi.com/subivic/Pachelbel_Canon_in_D.mid">Pachelbel_Canon_in_D.mid</link> at
+the <link url="http://www.classicalguitarmidi.com">Classical Guitar MIDI Archives</link>. You can also find a more extensive
+collection at <link url="http://www.classicalarchives.com">ClassicalArchives.com</link>, specifically
+<link url="http://www.classicalarchives.com/midi/p.html">Pachelbel MIDI files</link>.
+
+Create a .wav file of your finished work.</para>
+
+</section>
+
+<section id="sec21">
+<title>Optional: Modifications to Basic Whistler VMI</title>
+
+<para id="par22">Following are some suggested modifications you could try for your basic whistler VMI:</para>
+
+<list id="list23" list-type="bulleted">
+
+<item> Make the vibrato rate proportional to the intensity envelope. This characteristic is common for vocalists and many types of instrumentalists. </item>
+<item> Make the vibrato depth proportional to the intensity envelope. This is another characteristic common for vocalists and many types of instrumentalists. </item>
+<item> Vary either the vibrato rate or depth (or possibly both) according to the "amplitude" parameter provided by the prototype VMI. For example, higher amplitudes could be mapped to a faster rate or more depth. </item>
+<item> Duplicate the tone generator two more times with frequencies of <m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mn>2</m:mn><m:msub>
+    <m:mi>f</m:mi>
+    <m:mn>0</m:mn>
+   </m:msub>
+   
+  </m:mrow>
+ <m:annotation encoding="MathType-MTEF">
+ </m:annotation>
+ </m:semantics>
+</m:math> and <m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mn>3</m:mn><m:msub>
+    <m:mi>f</m:mi>
+    <m:mn>0</m:mn>
+   </m:msub>
+   
+  </m:mrow>
+ <m:annotation encoding="MathType-MTEF">
+ </m:annotation>
+ </m:semantics>
+</m:math>
+ and intensities of -10 dB and -20 dB, respectively, to create some overtones. Each of the tone generators should have the same vibrato rate and depth. The overtones  make the whistler sound a bit more like a flute or a singing voice. </item>
+
+</list>
+
+</section>
+
+</content>
+</document>

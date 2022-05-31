@@ -1,0 +1,55 @@
+Title: Reading and Writing Audio Files in LabVIEW
+
+Summary: Learn how to use LabVIEW to retrieve an audio signal from a
+WAV-format file, and how to save an audio signal that you have created 
+to a WAV-format file.
+
+Keywords: 
+audio
+WAV file
+scaling
+stereo
+LabVIEW
+
+
+CNXML for figures:
+
+---------------------------------------
+
+<media type="image/png" src="lvt_audio_simple-read.html">
+          <param name="thumbnail" value="lvt_audio_simple-read.png"/>
+        </media>
+<caption>
+   [video] LabVIEW Techniques: Retrieve an audio signal from a .wav file
+</caption>
+
+---------------------------------------
+
+<media type="image/png" src="lvt_audio_simple-write.html">
+          <param name="thumbnail" value="lvt_audio_simple-write.png"/>
+        </media>
+<caption>
+   [video] LabVIEW Techniques: Save an audio signal to a .wav file
+</caption>
+
+---------------------------------------
+
+<media type="image/png" src="lvt_audio_simple-write-quickscale.html">
+          <param name="thumbnail" value="lvt_audio_simple-write-quickscale.png"/>
+        </media>
+<caption>
+   [video] LabVIEW Techniques: Scale audio signal to +/- 1 range before 
+	saving to a .wav file
+</caption>
+
+---------------------------------------
+
+<media type="image/png" src="lvt_audio_simple-write-stereo.html">
+          <param name="thumbnail" value="lvt_audio_simple-write-stereo.png"/>
+        </media>
+<caption>
+   [video] LabVIEW Techniques: Save a stereo (two-channel) audio signal
+	to a .wav file
+</caption>
+
+---------------------------------------

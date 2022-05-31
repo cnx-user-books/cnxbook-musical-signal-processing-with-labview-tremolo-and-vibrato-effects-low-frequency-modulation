@@ -1,0 +1,134 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML">
+  <title>Tremolo Effect</title>
+  <metadata xmlns:md="http://cnx.rice.edu/mdml">
+  <md:content-id>m15497</md:content-id>
+  <md:title>Tremolo Effect</md:title>
+  <md:abstract>Tremolo is a type of low-frequency amplitude modulation. Learn about the vibraphone, a mallet-type percussion instrument
+that can create tremolo, experiment with the tremolo effect using an interactive LabVIEW VI, and learn how to model the tremolo effect mathematically.</md:abstract>
+  <md:uuid>ce5bb1e4-753e-440b-9754-1e88c7d35ef1</md:uuid>
+</metadata>
+
+<content>
+
+<table id="labview_banner" frame="none" summary=""><tgroup cols="2">
+<colspec rowsep="0" colsep="0"/> <colspec colwidth="6in" rowsep="0" colsep="0"/>
+<tbody>
+  <row>
+    <entry morerows="3"><media id="idp13306544" alt=""><image src="../../media/LabVIEWq.png" mime-type="image/png"/></media></entry>
+    <entry> This module refers to LabVIEW, a software development environment that features a graphical programming language.
+       Please see the <link document="m15428">LabVIEW QuickStart Guide</link> module for tutorials and documentation that will help you:</entry>
+  </row>
+  <row> <entry>• Apply LabVIEW to Audio Signal Processing </entry> </row>
+  <row> <entry>• Get started with LabVIEW</entry> </row>
+  <row> <entry>• Obtain a fully-functional evaluation edition of LabVIEW</entry> </row>
+</tbody>
+</tgroup>
+</table>
+
+
+<section id="sec1">
+<title>Overview</title>
+
+<para id="par2">Tremolo is a type of low-frequency amplitude modulation. After learning about the vibraphone, a mallet-type percussion instrument that creates tremolo, experiment with the tremolo effect using an interactive LabVIEW VI and learn how to model the tremolo effect mathematically.</para>
+
+</section>
+
+<section id="sec3">
+<title>Physical Tremolo: Vibraphone</title>
+
+<para id="par4">The <term>vibraphone</term> is a mallet-type percussion instrument similar to the xylophone and marimba. The percussionist in the right foreground of <link target-id="img-vibraphone"/> is playing a vibraphone.</para>
+
+<figure id="img-vibraphone">
+<media id="idp13201968" alt=""><image src="../../media/232084492_4d55954909_b.jpg" mime-type="image/jpeg" thumbnail="232084492_4d55954909.jpg"/></media>
+<caption>
+   Vibraphone (right foreground); click for larger version. Photographer: Charles Dietlein  (<link url="http://www.flickr.com/photos/dietlein/232084492/">http://www.flickr.com/photos/dietlein/232084492/</link>). Copyright holder has granted permission to display this image under the <link url="http://creativecommons.org/licenses/by-nc-nd/2.0">Creative Commons Attribution-NonCommercial-NoDerivs license</link>.
+</caption>
+</figure>
+
+<para id="par6">Following are the vibraphone's key characteristics:</para>
+
+<list id="list7" list-type="bulleted">
+
+<item> Range of three octaves, beginning on F3 (the F below middle C) </item>
+<item> Playing surface is covered by metal bars; the pitch of each bar increases as the length decreases; bars are typically struck by soft cord- or yarn-covered mallets </item>
+<item> Sound intensity is increased by placing a series of resonating tubes (resonators) directly under each bar </item>
+<item> Sustain pedal controls whether or not a damper is applied to the metal bars, giving the vibraphonist similar expressive control as a piano </item>
+<item> Motor-driven disks rotate between the metal bars and resonators cause sound intensity to fluctuate (<term>tremolo</term> effect) </item>
+
+</list>
+
+<para id="par8">The name "vibraphone" was originally derived from the term "vibrato," since the undulating sound of a vibraphone resembles that of a vocalist singing a long note with vibrato.
+However, <term>vibrato</term> refers to a low-frequency fluctuation in <emphasis>frequency</emphasis>, an altogether different effect (see <link document="m15496">Vibrato Effect</link> for details).</para>
+
+</section>
+
+<section id="sec9">
+<title>Tremolo Demonstration</title>
+
+<para id="par10"><media id="idp5635744" alt=""><image src="../../media/LabVIEW.png" mime-type="image/png"/></media> Download and run the LabVIEW VI
+<link resource="tremolo_demo.vi">tremolo_demo.vi</link>, which demonstrates the tremolo effect applied to a sinusoidal oscillator. Tremolo normally requires two controls: <term>rate</term> determines how quickly the amplitude should fluctuate, and <term>depth</term> establishes the amount of amplitude fluctuation. The third control adjusts the pitch of the sinusoidal oscillator.</para>
+
+</section>
+
+<section id="sec11">
+<title>Modeling the Tremolo Effect</title>
+
+<para id="par12">Tremolo is a type of low-frequency <term>amplitude modulation</term>. The screencast video of <link target-id="video-tremolo-eqn"/> develops the
+mathematical equations needed to model the tremolo effect. After watching the video, try the exercises below to ensure that you understand the main concepts.</para>
+
+<figure id="video-tremolo-eqn"><title><link url="https://youtu.be/ulrxiLpvfGw" window="new">https://youtu.be/ulrxiLpvfGw</link> (5:17)</title><media id="eip-idm654283184" display="block" alt="Insert alt text here"><video mime-type="video/mpeg" src="https://www.youtube.com/embed/ulrxiLpvfGw?rel=0" autoplay="false" width="640" height="460"/></media>
+
+
+<caption>[video] Develop the mathematical equations needed to model the tremolo effect
+</caption></figure><exercise id="exer14">
+<problem id="idp6745104">
+<para id="par15">What is the name of the term <m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:msub>
+    <m:mi>f</m:mi>
+    <m:mi>R</m:mi>
+   </m:msub>
+   
+  </m:mrow>
+ <m:annotation encoding="MathType-MTEF">
+ </m:annotation>
+ </m:semantics>
+</m:math>
+ ?</para>
+</problem>
+<solution id="idp5801152">
+<para id="par16">Rate</para>
+</solution>
+</exercise>
+<exercise id="exer17">
+<problem id="idm572720">
+<para id="par18">Which ratio is the basis of depth when expressed in decibels (dB)?</para>
+</problem>
+<solution id="idm500656">
+<para id="par19">Ratio of maximum to minimum loudness</para>
+</solution>
+</exercise>
+<exercise id="exer20">
+<problem id="idp7542032">
+<para id="par21">True/False: Tremolo rate is typically above 20 Hz.</para>
+</problem>
+<solution id="idp10486640">
+<para id="par22">False; tremolo rate is typically between 3 and 10 Hz</para>
+</solution>
+</exercise>
+<exercise id="exer23">
+<problem id="idp7876768">
+<para id="par24">Which modification to the basic envelope equation is required to avoid clipping?</para>
+</problem>
+<solution id="idm138976">
+<para id="par25">Subtract the depth value D</para>
+</solution>
+</exercise>
+<para id="par26">Now that you have been introduced to the main concepts of the tremolo effect, return to the interactive VI of the previous section. Experiment with the depth and rate controls,
+and confirm that the typical values mentioned in the screencast video in <link target-id="video-tremolo-eqn"/> seem reasonable.</para>
+
+</section>
+
+</content>
+</document>

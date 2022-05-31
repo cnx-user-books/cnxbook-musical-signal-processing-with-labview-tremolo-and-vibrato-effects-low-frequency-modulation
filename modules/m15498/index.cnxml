@@ -1,0 +1,141 @@
+<document xmlns="http://cnx.rice.edu/cnxml">
+  <title>[ mini-project ] Vibraphone virtual musical instrument (VMI) in LabVIEW</title>
+  <metadata xmlns:md="http://cnx.rice.edu/mdml">
+  <md:content-id>m15498</md:content-id>
+  <md:title>[ mini-project ] Vibraphone virtual musical instrument (VMI) in LabVIEW</md:title>
+  <md:abstract>The vibraphone percussion instrument can be well-modeled by a sinusoidal oscillator, an attack-decay envelope with a short attack and a long decay, and a low-frequency sinusoidal amplitude modulation. In this mini-project, develop code to model the vibraphone as a LabVIEW "virtual musical instrument" (VMI) that can be "played" by a MIDI music file.</md:abstract>
+  <md:uuid>9f9072da-6ad0-402b-a586-8c40b7c01796</md:uuid>
+</metadata>
+
+<content>
+
+<table id="labview_banner" frame="none" summary=""><tgroup cols="2">
+<colspec rowsep="0" colsep="0"/> <colspec colwidth="6in" rowsep="0" colsep="0"/>
+<tbody>
+  <row>
+    <entry morerows="3"><media id="idp80304" alt=""><image src="../../media/LabVIEWq.png" mime-type="image/png"/></media></entry>
+    <entry> This module refers to LabVIEW, a software development environment that features a graphical programming language.
+       Please see the <link document="m15428">LabVIEW QuickStart Guide</link> module for tutorials and documentation that will help you:</entry>
+  </row>
+  <row> <entry>• Apply LabVIEW to Audio Signal Processing </entry> </row>
+  <row> <entry>• Get started with LabVIEW</entry> </row>
+  <row> <entry>• Obtain a fully-functional evaluation edition of LabVIEW</entry> </row>
+</tbody>
+</tgroup>
+</table>
+
+
+<section id="sec1">
+<title>Objective</title>
+
+<para id="par2">The <term>vibraphone</term> percussion instrument can be well-modeled by a sinusoidal oscillator, an attack-decay envelope with a short attack and a long decay, and a low-frequency sinusoidal amplitude modulation. In this mini-project you will develop code to model the vibraphone as a LabVIEW <term>virtual musical instrument</term> (<term>VMI</term>) to be "played" by a MIDI file within <term>MIDI JamSession</term>.</para>
+
+</section>
+
+<section id="sec3">
+<title>Prerequisite Modules</title>
+
+<para id="par4">If you have not done so already, please study the pre-requisite module <link document="m15497">Tremolo Effect</link>. 
+If you are relatively new to LabVIEW, consider taking the course <link document="col10440">LabVIEW Techniques for Audio Signal Processing</link> 
+which provides the foundation you need to complete this mini-project activity, including working with arrays, creating subVIs, 
+playing an array to the soundcard, and saving an array as a .wav sound file.</para>
+
+</section>
+
+<section id="sec5">
+<title>Deliverables</title>
+
+<list id="list6" list-type="bulleted">
+
+<item> All LabVIEW code that you develop (block diagrams and front panels) </item>
+<item> All generated sounds in .wav format  </item>
+<item> Any plots or diagrams requested </item>
+<item> Summary write-up of your results </item>
+
+</list>
+
+</section>
+
+<section id="sec7">
+<title>Part 1: Tremolo Envelope Generator</title>
+
+<para id="par8">Create LabVIEW code to create a time-varying intensity envelope for the tremolo effect. Your code will require tremolo rate (in Hz), depth (in dB), and total number of samples and will produce a tremolo envelope with a sinusoidal shape as follows:</para>
+
+<para id="vi9">
+<media id="idp2854080" alt=""><labview src="behavior-tremolo-envelope.llb" viname="behavior-tremolo-envelope.vi" version="8.2" mime-type="application/x-labviewrpvi82" height="380" width="548"><param name="lvfppviname" value="behavior-tremolo-envelope.vi"/></labview></media>
+</para>
+
+<para id="par10">The maximum intensity will be fixed at 0 dB, and the sinusoid's amplitude will be "depth." Once you develop your code, compare its behavior with that of the interactive front panel above. Note that the time range of the interactive front panel is fixed at 1 second, but your code should produce any number of required samples.</para>
+
+</section>
+
+<section id="sec11">
+<title>Part 2: Attack/Decay Envelope Generator</title>
+
+<para id="par12">Create LabVIEW code to create a time-varying intensity envelope for the overall attack and decay of the note. Your code will require attack time and decay time (both in seconds), and will produce an envelope composed of two straight-line segments as follows:</para>
+
+<para id="vi13">
+<media id="idp4904672" alt=""><labview src="behavior-AD-envelope.llb" viname="behavior-AD-envelope.vi" version="8.2" mime-type="application/x-labviewrpvi82" height="410" width="500"><param name="lvfppviname" value="behavior-AD-envelope.vi"/></labview></media>
+</para>
+
+<para id="par14">The maximum intensity will be fixed at 0 dB, and the minimum intensity will be -40 dB. Once you develop your code, compare its behavior with that of the interactive front panel above.</para>
+
+</section>
+
+<section id="sec15">
+<title>Part 3: Attenuator</title>
+
+<para id="par16">Create LabVIEW code that will accept an "amplitude" parameter in the range 0 to 1, and will convert this parameter to an attenuation in the range -40 dB to 0 dB. The amplitude parameter will ultimately be supplied by MIDI_JamSession and represents the MIDI "note-on" velocity. Your code will map linear velocity onto a logarithmic intensity.</para>
+
+</section>
+
+<section id="sec17">
+<title>Part 4: Overall Amplitude Envelope</title>
+
+<para id="par18">Combine the code fragments you developed in Parts 1 to 3 to create an overall intensity envelope. Remember that when you work with intensity values in decibels, you simply need to <emphasis>add</emphasis> them together. Next, "undo" the equation for decibels to convert the intensity envelope into an amplitude envelope (hint: you need a value of "20" someplace).
+
+Choose a representative set of parameter values and plot your overall intensity envelope and your overall amplitude envelope.
+</para>
+
+</section>
+
+<section id="sec19">
+<title>Part 5: Vibraphone VMI</title>
+
+<para id="par20">In this part you will design a vibraphone <term>virtual musical instrument</term> (<term>VMI</term> for short) that can be played by "MIDI JamSession." If necessary, visit <link document="m15053">MIDI JamSession</link>, download the application VI .zip file, and view the screencast video in that module to learn more about the application and how to create your own virtual musical instrument. Your VMI will accept parameters that specify frequency and amplitude of a single note, and will produce an array of audio samples corresponding to a single strike on the metal bar of a vibraphone instrument.
+
+Use a sinusoidal signal as the oscillator (tone generator), and apply the amplitude envelope you generated in Part 4. You may wish to keep your parameters as front-panel controls and add the "Play Waveform" ExpressVI to listen to your VMI during development. Adjust the parameters to obtain pleasing and realistic settings, then convert the front-panel controls to constants and remove "Play Waveform." Your finished VMI must not contain any front panel controls or indicators beyond what is provided in the prototype instrument.
+</para>
+
+<note id="idm709888">The prototype VMI includes the "length" parameter to set the number of samples to be produced by your own design.
+The length is derived from the amount of elapsed time between "note on" and "note off" MIDI messages for a given note.
+To make a more realistic sound for the vibraphone, ignore this length value and create a fixed number of samples determined by your attack and decay times.</note>
+
+<para id="par21">Finally, choose a suitable MIDI file and use MIDI JamSession to play your vibraphone VMI. MIDI files that contain a solo instrument, slower tempo, and distinct notes will likely produce better results.
+
+Create a .wav file of your finished work.
+
+The <link target-id="video-part5-tips"/> screencast video provides some coding tips.</para>
+
+<figure id="video-part5-tips"><title><link url="https://youtu.be/AKiPNYKv6fY" window="new">https://youtu.be/AKiPNYKv6fY</link> (7:43)</title><media id="eip-idm252843056" display="block" alt="Insert alt text here"><video mime-type="video/mpeg" src="https://www.youtube.com/embed/AKiPNYKv6fY?rel=0" autoplay="false" width="640" height="460"/></media>
+<caption>[video] Coding tips for Part 5
+</caption></figure></section>
+
+<section id="sec23">
+<title>Optional: Modifications to Basic Vibraphone VMI</title>
+
+<para id="par24">Following are some suggested modifications you could try for your basic vibraphone VMI:</para>
+
+<list id="list25" list-type="bulleted">
+
+<item> Make the decay time vary according to the "length" parameter provided by the prototype VMI. While a variable decay time may not necessarily be physically realistic, it may sound interesting. </item>
+<item> Use a fixed decay time, but use the "length" parameter to determine when to cut off (or damp) the tone. You will need to include a short envelope segment to taper the amplitude back to zero, because an abrupt cutoff will cause click noise. </item>
+<item> Make the tremolo depth (or rate, or both) vary according to the "amplitude" parameter provided by the prototype VMI. For example, a higher amplitude could be mapped to a faster rate or more depth. </item>
+<item> Remove the tremolo envelope from the vibraphone VMI, and use it as a single envelope for the entire piece (you would need to read the .wav file produced by MIDI JamSession and apply the tremolo envelope). On the real vibraphone, the rotating disks turn at the same rate for all of the resonators, so placing the tremolo on each individual note is not the best way to model the physical instrument. </item>
+
+</list>
+
+</section>
+
+</content>
+</document>

@@ -1,0 +1,16 @@
+<col:collection xmlns="http://cnx.rice.edu/collxml" xmlns:col="http://cnx.rice.edu/collxml" xml:lang="en">
+  <metadata xmlns:md="http://cnx.rice.edu/mdml" mdml-version="0.5">
+    <md:content-id>col10482</md:content-id>
+    <md:title>Musical Signal Processing with LabVIEW -- Tremolo and Vibrato Effects (Low-Frequency Modulation)</md:title>
+    <md:language>en</md:language>
+    <md:license url="http://creativecommons.org/licenses/by/2.0/">Creative Commons Attribution License</md:license>
+    <md:uuid>b1c95e2d-edce-4d82-ab14-06ae7361b424</md:uuid>
+<md:slug>musical-signal-processing-with-labview-tremolo-and-vibrato-effects-low-frequency-modulation</md:slug>
+</metadata>
+  <col:content>
+    <col:module document="m15497"/>
+    <col:module document="m15496"/>
+    <col:module document="m15498"/>
+    <col:module document="m15500"/>
+  </col:content>
+</col:collection>

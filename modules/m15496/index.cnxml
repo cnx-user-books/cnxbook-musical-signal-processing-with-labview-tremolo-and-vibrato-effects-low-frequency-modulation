@@ -1,0 +1,152 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML">
+  <title>Vibrato Effect</title>
+  <metadata xmlns:md="http://cnx.rice.edu/mdml">
+  <md:content-id>m15496</md:content-id>
+  <md:title>Vibrato Effect</md:title>
+  <md:abstract>Vibrato is a type of low-frequency frequency modulation. Learn about vibrato produced by the singing voice and musical instruments, 
+experiment with the vibrato effect using an interactive LabVIEW VI, and learn how to model the vibrato effect mathematically.</md:abstract>
+  <md:uuid>b0e03bdf-55ed-4122-9bbc-906d19ecfa41</md:uuid>
+</metadata>
+
+<content>
+
+<table id="labview_banner" frame="none" summary=""><tgroup cols="2">
+<colspec rowsep="0" colsep="0"/> <colspec colwidth="6in" rowsep="0" colsep="0"/>
+<tbody>
+  <row>
+    <entry morerows="3"><media id="idm1760976" alt=""><image src="../../media/LabVIEWq.png" mime-type="image/png"/></media></entry>
+    <entry> This module refers to LabVIEW, a software development environment that features a graphical programming language.
+       Please see the <link document="m15428">LabVIEW QuickStart Guide</link> module for tutorials and documentation that will help you:</entry>
+  </row>
+  <row> <entry>• Apply LabVIEW to Audio Signal Processing </entry> </row>
+  <row> <entry>• Get started with LabVIEW</entry> </row>
+  <row> <entry>• Obtain a fully-functional evaluation edition of LabVIEW</entry> </row>
+</tbody>
+</tgroup>
+</table>
+
+
+<section id="sec1">
+<title>Overview</title>
+
+<para id="par2">Vibrato is a type of low-frequency frequency modulation. After learning about vibrato produced by the singing voice and musical instruments, you will experiment with the vibrato effect using an interactive LabVIEW VI and learn how to model the vibrato effect mathematically.</para>
+
+</section>
+
+<section id="sec3">
+<title>Physical Vibrato: Singing Voice and Instruments</title>
+
+<para id="par4">Vocalists and instrumentalists will introduce <term>vibrato</term> -- a low-frequency variation in pitch -- into long sustained notes primarily to add musical interest. Listeners are drawn to sounds with dynamic (changing) spectral characteristics, and vibrato makes a sustained note sound much more interesting than a constant frequency. Moreover, sustaining a long note at a constant frequency with sufficient accuracy to avoid drifting "out of tune" is challenging for vocalists and wind-based instruments.
+
+Vibrato is produced in a variety of ways, depending on the instrument. Trombonists wiggle the slide slightly to change the overall tube length that sets pitch. A violinist will rock his or her left hand that presses the string  to slightly alter the effective string length.
+</para>
+
+</section>
+
+<section id="sec5">
+<title>Vibrato Demonstration</title>
+
+<para id="par6"><media id="idp5471456" alt=""><image src="../../media/LabVIEW.png" mime-type="image/png"/></media> Download and run the LabVIEW VI
+<link resource="vibrato.vi">vibrato.vi</link> to
+demonstrate the vibrato effect applied to a sinusoidal oscillator. This VI requires the <link document="m15430">TripleDisplay</link> front-panel indicator. Vibrato normally requires two controls: <term>rate</term> determines how quickly the frequency should fluctuate, and <term>depth</term> establishes the amount of frequency fluctuation. The third control adjusts the pitch of the sinusoidal oscillator.</para>
+
+</section>
+
+<section id="sec7">
+<title>Modeling the Vibrato Effect</title>
+
+<para id="par8">Vibrato is a type of low-frequency <term>frequency modulation</term>.
+In this section the mathematical equations necessary to model the vibrato effect will be developed.
+In addition, two important effects associated with the singing voice will be discussed to produce a more realistic model.</para>
+
+<section id="sec9">
+<title>Naive Approach</title>
+
+<para id="par10">The <link target-id="video-vibrato-eqn-naive"/> screencast video develops the mathematical equation needed to model the vibrato effect in perhaps an intuitively-obvious (but unfortunately incorrect) way.
+After watching the video, try the interactive front panel VI below that is part of the demonstration, then respond to the exercise questions to ensure that you understand the main concepts.</para>
+
+<figure id="video-vibrato-eqn-naive"><title><link url="https://youtu.be/zMbqaUKYcZY" window="new">https://youtu.be/zMbqaUKYcZY</link> (6:20)</title><media id="eip-idm528874944" display="block" alt="Insert alt text here"><video mime-type="video/mpeg" src="https://www.youtube.com/embed/zMbqaUKYcZY?rel=0" autoplay="false" width="640" height="460"/></media>
+<caption>[video] Perhaps "intuitively-obvious" (but incorrect) way to model vibrato
+</caption></figure><para id="par12"><media id="idm8004672" alt=""><image src="../../media/LabVIEW.png" mime-type="image/png"/></media> Download and run the LabVIEW VI
+<link resource="vibrato_naive.vi">vibrato_naive.vi</link>.</para>
+
+<exercise id="exer13">
+<problem id="idm8428736">
+<para id="par14">What is the main auditory effect produced by the intuitively-obvious approach to modeling vibrato?</para>
+</problem>
+<solution id="idp5303648">
+<para id="par15">The amount of frequency fluctuation (deviation) increases with time rather than remaining constant.</para>
+</solution>
+</exercise>
+<exercise id="exer16">
+<problem id="idm7829632">
+<para id="par17">When modifying the basic sinusoidal oscillator equation, which part -- frequency or phase - requires the most attention?</para>
+</problem>
+<solution id="idm101424">
+<para id="par18">Phase; the entire argument to the sine function must be considered as a time-varying phase function <m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mi>ϕ</m:mi><m:mo stretchy="false">(</m:mo><m:mi>t</m:mi><m:mo stretchy="false">)</m:mo>
+  </m:mrow>
+ <m:annotation encoding="MathType-MTEF">
+ </m:annotation>
+ </m:semantics>
+</m:math>  </para>
+</solution>
+</exercise>
+<exercise id="exer19">
+<problem id="idm962464">
+<para id="par20">How should the phase function <m:math>
+ <m:semantics>
+  <m:mrow>
+   <m:mi>ϕ</m:mi><m:mo stretchy="false">(</m:mo><m:mi>t</m:mi><m:mo stretchy="false">)</m:mo>
+  </m:mrow>
+ <m:annotation encoding="MathType-MTEF">
+ </m:annotation>
+ </m:semantics>
+</m:math>  be designed to achieve vibrato?</para>
+</problem>
+<solution id="idm136944">
+<para id="par21">A ramp function with a superimposed sinusoidal variation.</para>
+</solution>
+</exercise>
+</section>
+
+<section id="sec22">
+<title>Correct Approach</title>
+
+<para id="par23">The <link target-id="video-vibrato-eqn-correct"/> screencast video develops the mathematical equation needed to
+model the vibrato effect for a constant low-frequency variation. </para>
+
+<para id="par24"><media id="idm305168" alt=""><image src="../../media/LabVIEW.png" mime-type="image/png"/></media> Refer again to the LabVIEW VI
+<link resource="vibrato.vi">vibrato.vi</link> you downloaded earlier.</para>
+
+<figure id="video-vibrato-eqn-correct"><title><link url="https://youtu.be/UcLTYwfDeaU" window="new">https://youtu.be/UcLTYwfDeaU</link> (3:33)</title><media id="eip-idm494917456" display="block" alt="Insert alt text here"><video mime-type="video/mpeg" src="https://www.youtube.com/embed/UcLTYwfDeaU?rel=0" autoplay="false" width="640" height="460"/></media>
+<caption>[video] Correct way to model vibrato
+</caption></figure></section>
+
+<section id="sec26">
+<title>Improved Realism for Singing Voice</title>
+
+<para id="par27">Several effects become immediately apparent when listening to an opera singer:</para>
+
+<list id="list28" list-type="bulleted">
+
+<item> Vibrato rate begins slowly then increases to a faster rate; for example, listen to this short clip: <link resource="sing.wav">sing.wav</link> </item>
+<item> Vibrato depth increases as the note progresses (listen to the clip again: <link resource="sing.wav">sing.wav</link>) </item>
+<item> Loudness (intensity) is initially low then gradually increases (listen to the same clip one more time: <link resource="sing.wav">sing.wav</link>) </item>
+<item> The "brightness" (amount of overtones or harmonics) is proportional to intensity (please listen to the same clip one last time: <link resource="sing.wav">sing.wav</link>) </item>
+
+</list>
+
+<para id="par29">These effects are also evident when listening to expressive instrumentalists from the strings, brass, and woodwind sections of the orchestra.
+
+The mathematical model for vibrato can therefore be improved by (1) making the vibrato depth <emphasis>track</emphasis> (or be proportional to) the intensity envelope of the sound,
+and by (2) making the vibrato rate track the intensity envelope. Modeling the "brightness" effect would require adding overtones or harmonics to the sound.</para>
+
+</section>
+
+</section>
+
+</content>
+</document>

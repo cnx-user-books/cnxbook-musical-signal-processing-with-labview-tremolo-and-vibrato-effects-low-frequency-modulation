@@ -1,0 +1,17 @@
+Title: 
+
+Summary:
+
+Keywords (one per line): 
+
+
+CNXML for figures:
+
+---------------------------------------
+
+<media type="image/png" src="NAME.html">
+          <param name="thumbnail" value="NAME.png"/>
+        </media>
+<caption>
+   [video] TITLE
+</caption>
